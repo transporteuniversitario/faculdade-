@@ -1,0 +1,13 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "nome_completo": "Administrador do Sistema",
+      "usuario": "admin@belmonte",
+      "senha": "admin123456",
+      "tipo": "admin",
+      "autorizado": true
+    }
+  ],
+  "alunos": []
+}
