@@ -7,6 +7,7 @@ from config import CONFIG
 from autenticar import autenticar_usuario
 from admin import tela_admin
 from aluno import tela_aluno
+from utils.auth import autenticar_usuario
 from utils.gerar_carteirinha import gerar_imagem_carteirinha
 
 st.set_page_config(page_title="Carteirinhas Belmonte", layout="centered")
