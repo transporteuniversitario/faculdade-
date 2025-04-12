@@ -1,11 +1,13 @@
 import streamlit as st
 import sqlite3
-from autenticar import autenticar_usuario, gerar_credenciais
-from gerar_carteirinha import gerar_carteirinha
-from gerar_qrcode import gerar_qrcode
+from utils.gerar_qrcode import gerar_qrcode
 import os
 from PIL import Image
 from config import CONFIG
+from autenticar import autenticar_usuario
+from admin import tela_admin
+from aluno import tela_aluno
+from utils.gerar_carteirinha import gerar_imagem_carteirinha
 
 st.set_page_config(page_title="Carteirinhas Belmonte", layout="centered")
 
