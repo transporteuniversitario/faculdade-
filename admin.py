@@ -15,7 +15,7 @@ ALUNOS_DB = "data/alunos.json"
 CONFIG_DB = "data/config.json"
 CAMINHO_BD = "base_de_dados.json"
 
-def tela_admin(usuario):
+def tela_admin():
     st.subheader(f"Bem-vindo, {usuario} (Admin)")
 
     # Carrega usuários
