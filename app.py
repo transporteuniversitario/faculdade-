@@ -1,8 +1,8 @@
 import streamlit as st
 import sqlite3
-from utils.autenticar import autenticar_usuario, gerar_credenciais
-from utils.gerar_carteirinha import gerar_carteirinha
-from utils.gerar_qrcode import gerar_qrcode
+from autenticar import autenticar_usuario, gerar_credenciais
+from gerar_carteirinha import gerar_carteirinha
+from gerar_qrcode import gerar_qrcode
 import os
 from PIL import Image
 from config import CONFIG
