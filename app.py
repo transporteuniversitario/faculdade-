@@ -1,6 +1,6 @@
 import streamlit as st
 import sqlite3
-from utils.gerar_qrcode import gerar_qrcode
+from utils.gerar_qr_code import gerar_qr_code
 import os
 from PIL import Image
 from config import CONFIG
