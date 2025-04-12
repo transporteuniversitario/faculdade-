@@ -2,13 +2,57 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))import streamlit as st
 import json
+import streamlit as st
 from utils.auth import autenticar_admin
 from utils.gerar_carteirinha import gerar_imagem_carteirinha
+from utils.gerar_carteirinha import gerar_carteirinha
+from utils.usuarios import carregar_usuarios, salvar_usuarios
+from utils.validade import atualizar_validade_padrao
 from datetime import datetime
 
 # Caminhos dos arquivos
 ALUNOS_DB = "data/alunos.json"
 CONFIG_DB = "data/config.json"
+CAMINHO_BD = "base_de_dados.json"
+
+def tela_admin(usuario):
+    st.subheader(f"Bem-vindo, {usuario} (Admin)")
+
+    # Carrega usuários
+    usuarios = carregar_usuarios()
+
+    # Aba para aprovar novos alunos
+    st.header("Aprovação de Alunos")
+    alunos_pendentes = [u for u in usuarios if u["tipo"] == "aluno" and not u.get("aprovado", False)]
+    if not alunos_pendentes:
+        st.info("Nenhum aluno pendente.")
+    for aluno in alunos_pendentes:
+        with st.expander(f"{aluno['nome']} ({aluno['email']})"):
+            if st.button(f"Aprovar {aluno['nome']}", key=aluno['email']):
+                aluno["aprovado"] = True
+                salvar_usuarios(usuarios)
+                st.success(f"{aluno['nome']} aprovado com sucesso!")
+
+    # Aba para editar validade e logos
+    st.header("Configurações Padrão")
+
+    validade = st.text_input("Validade padrão para novas carteirinhas (ex: Dez/2025):")
+    if st.button("Atualizar validade padrão"):
+        atualizar_validade_padrao(validade)
+        st.success("Validade padrão atualizada!")
+
+    # Futuras opções para atualizar logo e assinatura padrão
+    st.info("Para alterar imagens padrão (logo, assinatura), substitua os arquivos na pasta static/.")
+
+    # Lista de alunos aprovados
+    st.header("Alunos Aprovados")
+    alunos_aprovados = [u for u in usuarios if u["tipo"] == "aluno" and u.get("aprovado", False)]
+    if not alunos_aprovados:
+        st.warning("Nenhum aluno aprovado.")
+    for aluno in alunos_aprovados:
+        st.write(f"{aluno['nome']} - {aluno['email']}")
+
+
 
 # Carrega dados de alunos
 def carregar_alunos():
