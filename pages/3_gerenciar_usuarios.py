@@ -1,7 +1,8 @@
 import streamlit as st
 import json
-import os
-from utils.auth import is_admin_logged_in, logout, load_usuarios, save_usuarios
+import osfrom utils.auth 
+import is_admin_logged_in, logout, load_usuarios, save_usuarios
+
 
 cabecalho_pag("Gerenciar Usuários")
 
