@@ -1,6 +1,8 @@
 # autenticar.py
 import pandas as pd
 import hashlib
+import json
+
 
 def carregar_usuarios():
     try:
@@ -13,17 +15,15 @@ def salvar_usuarios(df):
 
 def hash_senha(senha):
     return hashlib.sha256(senha.encode()).hexdigest()
-
-import json
-
+    
 def autenticar_usuario(usuario, senha):
     with open("base_de_dados.json", "r") as f:
         dados = json.load(f)
-
-    for u in dados["usuarios"]:
-        if u["usuario"] == usuario and u["senha"] == senha:
-            return u["tipo"]
+        for user in dados["usuarios"]:
+            if user["usuario"] == usuario and user["senha"] == senha:
+                return user["tipo"]
     return None
+
     
 def cadastrar_usuario(nome, email, senha, tipo="aluno"):
     usuarios = carregar_usuarios()
